@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TikTok Random API — Demo</title>
+  <style>
+    :root{font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;}
+    body{margin:0;padding:32px;background:#0f172a;color:#e6eef8}
+    .card{max-width:760px;margin:0 auto;background:linear-gradient(180deg,#07102980,#0b163680);padding:24px;border-radius:12px;box-shadow:0 6px 30px rgba(2,6,23,.6)}
+    h1{margin:0 0 12px;font-size:20px}
+    p.lead{margin:0 0 18px;color:#bcd2f6}
+    .row{display:flex;gap:8px}
+    input[type="text"]{flex:1;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.06);background:transparent;color:inherit}
+    button{padding:10px 14px;border-radius:8px;border:0;background:#2563eb;color:white;cursor:pointer}
+    .result{margin-top:18px;padding:14px;border-radius:8px;background:rgba(255,255,255,.02);word-break:break-all}
+    .actions{margin-top:10px;display:flex;gap:8px}
+    small.note{display:block;margin-top:12px;color:#9fb4e0}
+    footer{margin-top:18px;color:#9fb4e0;font-size:13px}
+    a.link{color:#9ae6ff}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>TikTok Random API — Demo</h1>
+    <p class="lead">Giao diện đơn giản để gọi API <code>/random.php</code> và nhận về link ngẫu nhiên. Bạn có thể thay URL API nếu đặt file PHP ở chỗ khác.</p>
+
+    <div class="row">
+      <input id="apiUrl" type="text" value="/random.php" aria-label="API URL" />
+      <button id="getBtn">Get Random</button>
+    </div>
+
+    <div id="resultBox" class="result" style="display:none">
+      <div><strong>Response JSON:</strong></div>
+      <pre id="jsonOut" style="margin:8px 0 0;padding:8px;background:rgba(0,0,0,0.2);border-radius:6px;overflow:auto"></pre>
+
+      <div class="actions">
+        <button id="copyBtn">Copy URL</button>
+        <button id="openBtn">Open in new tab</button>
+        <button id="moreBtn">Get another</button>
+      </div>
+
+      <small class="note">Nếu API nằm trên domain khác, hãy đảm bảo PHP file cho phép CORS (Access-Control-Allow-Origin: *).</small>
+    </div>
+
+    <footer>
+      Thông thường TikTok sẽ block việc nhúng trực tiếp — file này chỉ hiển thị link và mở ra tab mới. Upload <code>random.php</code> và file này cùng thư mục trên hosting để chạy.
+    </footer>
+  </div>
+
+<script>
+const apiInput = document.getElementById('apiUrl');
+const getBtn = document.getElementById('getBtn');
+const resultBox = document.getElementById('resultBox');
+const jsonOut = document.getElementById('jsonOut');
+const copyBtn = document.getElementById('copyBtn');
+const openBtn = document.getElementById('openBtn');
+const moreBtn = document.getElementById('moreBtn');
+
+async function fetchRandom() {
+  const url = apiInput.value.trim() || '/random.php';
+  try {
+    getBtn.disabled = true;
+    getBtn.textContent = 'Loading...';
+
+    const res = await fetch(url, { cache: 'no-store' });
+    const json = await res.json();
+
+    jsonOut.textContent = JSON.stringify(json, null, 2);
+    resultBox.style.display = 'block';
+
+    // Save the last url if available
+    if (json && json.data) {
+      resultBox.dataset.last = json.data;
+    } else {
+      resultBox.dataset.last = '';
+    }
+  } catch (err) {
+    jsonOut.textContent = 'Error: ' + (err.message || err);
+    resultBox.style.display = 'block';
+    resultBox.dataset.last = '';
+  } finally {
+    getBtn.disabled = false;
+    getBtn.textContent = 'Get Random';
+  }
+}
+
+getBtn.addEventListener('click', fetchRandom);
+apiInput.addEventListener('keydown', (e)=>{ if(e.key==='Enter') fetchRandom(); });
+copyBtn.addEventListener('click', ()=>{
+  const url = resultBox.dataset.last || '';
+  if (!url) return alert('Chưa có URL để copy');
+  navigator.clipboard.writeText(url).then(()=> alert('Đã copy: '+url));
+});
+openBtn.addEventListener('click', ()=>{
+  const url = resultBox.dataset.last || '';
+  if (!url) return alert('Chưa có URL để mở');
+  window.open(url, '_blank');
+});
+moreBtn.addEventListener('click', fetchRandom);
+</script>
+</body>
+</html>
