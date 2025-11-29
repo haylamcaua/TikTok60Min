@@ -1,6 +1,7 @@
-// getvideo.js
-(function () {
-    const videos = [
+// RandomTiktok.json.js
+
+(function() {
+  const videos = [
     "https://lite.tiktok.com/t/ZSfXLgJJs/",
     "https://lite.tiktok.com/t/ZSfXLWtQS/",
     "https://lite.tiktok.com/t/ZSfXLWGqR/",
@@ -40,18 +41,19 @@
     "https://lite.tiktok.com/t/ZSfXLEuxd/",
     "https://lite.tiktok.com/t/ZSfXLvbEJ/",
     "https://lite.tiktok.com/t/ZSfXNLwgn/"
-    ];
+  ];
 
-    const randomVideo = videos[Math.floor(Math.random() * videos.length)];
+  // Lấy random video
+  const randomIndex = Math.floor(Math.random() * videos.length);
 
-    const response = {
-        status: "success",
-        data: randomVideo
-    };
+  // JSON trả về
+  const response = {
+    status: "success",
+    data: videos[randomIndex]
+  };
 
-    // Trả JSON đúng, không blob, không 304
-    const jsonText = JSON.stringify(response);
-
-    document.write(jsonText);
+  // In JSON trực tiếp trên trang
+  document.open();
+  document.write(JSON.stringify(response, null, 2));
+  document.close();
 })();
-
