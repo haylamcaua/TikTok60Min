@@ -1,8 +1,6 @@
-<?php
-header('Content-Type: application/json; charset=utf-8');
-header('Access-Control-Allow-Origin: *');
-
-$videos = [
+// getvideo.js
+(function () {
+    const videos = [
     "https://lite.tiktok.com/t/ZSfXLgJJs/",
     "https://lite.tiktok.com/t/ZSfXLWtQS/",
     "https://lite.tiktok.com/t/ZSfXLWGqR/",
@@ -42,11 +40,18 @@ $videos = [
     "https://lite.tiktok.com/t/ZSfXLEuxd/",
     "https://lite.tiktok.com/t/ZSfXLvbEJ/",
     "https://lite.tiktok.com/t/ZSfXNLwgn/"
-];
+    ];
 
-$random = $videos[array_rand($videos)];
+    const randomVideo = videos[Math.floor(Math.random() * videos.length)];
 
-echo json_encode([
-    "status" => "success",
-    "data" => $random
-], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+    const response = {
+        status: "success",
+        data: randomVideo
+    };
+
+    // Trả JSON đúng, không blob, không 304
+    const jsonText = JSON.stringify(response);
+
+    document.write(jsonText);
+})();
+
