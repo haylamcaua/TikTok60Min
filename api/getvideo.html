@@ -1,7 +1,17 @@
 <!doctype html>
+<html>
+<head>
 <meta charset="utf-8">
 
+<!-- Ngăn cache 100% để tránh Status 304 -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+</head>
+<body>
 <script>
+  // Danh sách video
   const videos = [
     "https://lite.tiktok.com/t/ZSfXLgJJs/",
     "https://lite.tiktok.com/t/ZSfXLWtQS/",
@@ -51,8 +61,10 @@
     data: pick
   });
 
-  // Trả JSON thuần + giữ nguyên URL
-  document.open("application/json");
+  // --- TRẢ JSON CHUẨN GIỮ NGUYÊN URL ---
+  document.open("application/json; charset=utf-8");
   document.write(json);
   document.close();
 </script>
+</body>
+</html>
