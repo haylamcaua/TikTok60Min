@@ -1,9 +1,5 @@
 <!doctype html>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-
 <script>
-  // Danh sách video
   const videos = [
     "https://lite.tiktok.com/t/ZSfXLgJJs/",
     "https://lite.tiktok.com/t/ZSfXLWtQS/",
@@ -46,17 +42,16 @@
     "https://lite.tiktok.com/t/ZSfXNLwgn/"
   ];
 
-  // Lấy ngẫu nhiên
   const pick = videos[Math.floor(Math.random() * videos.length)];
 
-  // Tạo JSON
-  const json = JSON.stringify({
+  const body = JSON.stringify({
     status: "success",
     data: pick
-  }, null, 0);
+  });
 
-  // Ghi đè toàn bộ trang và in JSON
-  document.open("application/json");
-  document.write(json);
-  document.close();
+  const blob = new Blob([body], { type: "application/json" });
+
+  // Trả JSON chuẩn
+  const url = URL.createObjectURL(blob);
+  location.href = url;
 </script>
