@@ -1,85 +1,62 @@
 <!doctype html>
-<html lang="vi">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>getvideo - random JSON</title>
-</head>
-<body>
-  <noscript>
-    Vui lòng bật JavaScript để trang trả về JSON.
-  </noscript>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <script>
-    (function () {
-      // Danh sách video (dán nguyên list của bạn vào đây)
-      const videos = [
-        "https://lite.tiktok.com/t/ZSfXLgJJs/",
-        "https://lite.tiktok.com/t/ZSfXLWtQS/",
-        "https://lite.tiktok.com/t/ZSfXLWGqR/",
-        "https://lite.tiktok.com/t/ZSfXLme4c/",
-        "https://lite.tiktok.com/t/ZSfXLXuxC/",
-        "https://lite.tiktok.com/t/ZSfXLyYMo/",
-        "https://lite.tiktok.com/t/ZSfXLyE6C/",
-        "https://lite.tiktok.com/t/ZSfXNkBgT/",
-        "https://lite.tiktok.com/t/ZSfXLw9sw/",
-        "https://lite.tiktok.com/t/ZSfXLKyPm/",
-        "https://lite.tiktok.com/t/ZSfXL3aoa/",
-        "https://lite.tiktok.com/t/ZSfXN24Ff/",
-        "https://lite.tiktok.com/t/ZSfXLox6Q/",
-        "https://lite.tiktok.com/t/ZSfXN8JnD/",
-        "https://lite.tiktok.com/t/ZSfXNF5C1/",
-        "https://lite.tiktok.com/t/ZSfXN6wcC/",
-        "https://lite.tiktok.com/t/ZSfXNF9hY/",
-        "https://lite.tiktok.com/t/ZSfXNYfeu/",
-        "https://lite.tiktok.com/t/ZSfXNjFxS/",
-        "https://lite.tiktok.com/t/ZSfXNF1MU/",
-        "https://lite.tiktok.com/t/ZSfXNY9MF/",
-        "https://lite.tiktok.com/t/ZSfXNNr68/",
-        "https://lite.tiktok.com/t/ZSfXNrkfM/",
-        "https://lite.tiktok.com/t/ZSfXNFD7Q/",
-        "https://lite.tiktok.com/t/ZSfXLTAsv/",
-        "https://lite.tiktok.com/t/ZSfXNjX51/",
-        "https://lite.tiktok.com/t/ZSfXNhK1J/",
-        "https://lite.tiktok.com/t/ZSfXLoRXA/",
-        "https://lite.tiktok.com/t/ZSfXNFJcB/",
-        "https://lite.tiktok.com/t/ZSfXNkPUA/",
-        "https://lite.tiktok.com/t/ZSfXL3JkN/",
-        "https://lite.tiktok.com/t/ZSfXNNC8Y/",
-        "https://lite.tiktok.com/t/ZSfXNY2Hy/",
-        "https://lite.tiktok.com/t/ZSfXN1YRU/",
-        "https://lite.tiktok.com/t/ZSfXNJYxC/",
-        "https://lite.tiktok.com/t/ZSfXL3qQv/",
-        "https://lite.tiktok.com/t/ZSfXLEuxd/",
-        "https://lite.tiktok.com/t/ZSfXLvbEJ/",
-        "https://lite.tiktok.com/t/ZSfXNLwgn/"
-      ];
+<script>
+  // Danh sách video
+  const videos = [
+    "https://lite.tiktok.com/t/ZSfXLgJJs/",
+    "https://lite.tiktok.com/t/ZSfXLWtQS/",
+    "https://lite.tiktok.com/t/ZSfXLWGqR/",
+    "https://lite.tiktok.com/t/ZSfXLme4c/",
+    "https://lite.tiktok.com/t/ZSfXLXuxC/",
+    "https://lite.tiktok.com/t/ZSfXLyYMo/",
+    "https://lite.tiktok.com/t/ZSfXLyE6C/",
+    "https://lite.tiktok.com/t/ZSfXNkBgT/",
+    "https://lite.tiktok.com/t/ZSfXLw9sw/",
+    "https://lite.tiktok.com/t/ZSfXLKyPm/",
+    "https://lite.tiktok.com/t/ZSfXL3aoa/",
+    "https://lite.tiktok.com/t/ZSfXN24Ff/",
+    "https://lite.tiktok.com/t/ZSfXLox6Q/",
+    "https://lite.tiktok.com/t/ZSfXN8JnD/",
+    "https://lite.tiktok.com/t/ZSfXNF5C1/",
+    "https://lite.tiktok.com/t/ZSfXN6wcC/",
+    "https://lite.tiktok.com/t/ZSfXNF9hY/",
+    "https://lite.tiktok.com/t/ZSfXNYfeu/",
+    "https://lite.tiktok.com/t/ZSfXNjFxS/",
+    "https://lite.tiktok.com/t/ZSfXNF1MU/",
+    "https://lite.tiktok.com/t/ZSfXNY9MF/",
+    "https://lite.tiktok.com/t/ZSfXNNr68/",
+    "https://lite.tiktok.com/t/ZSfXNrkfM/",
+    "https://lite.tiktok.com/t/ZSfXNFD7Q/",
+    "https://lite.tiktok.com/t/ZSfXLTAsv/",
+    "https://lite.tiktok.com/t/ZSfXNjX51/",
+    "https://lite.tiktok.com/t/ZSfXNhK1J/",
+    "https://lite.tiktok.com/t/ZSfXLoRXA/",
+    "https://lite.tiktok.com/t/ZSfXNFJcB/",
+    "https://lite.tiktok.com/t/ZSfXNkPUA/",
+    "https://lite.tiktok.com/t/ZSfXL3JkN/",
+    "https://lite.tiktok.com/t/ZSfXNNC8Y/",
+    "https://lite.tiktok.com/t/ZSfXNY2Hy/",
+    "https://lite.tiktok.com/t/ZSfXN1YRU/",
+    "https://lite.tiktok.com/t/ZSfXNJYxC/",
+    "https://lite.tiktok.com/t/ZSfXL3qQv/",
+    "https://lite.tiktok.com/t/ZSfXLEuxd/",
+    "https://lite.tiktok.com/t/ZSfXLvbEJ/",
+    "https://lite.tiktok.com/t/ZSfXNLwgn/"
+  ];
 
-      // Chọn ngẫu nhiên
-      const pick = videos[Math.floor(Math.random() * videos.length)];
+  // Lấy ngẫu nhiên
+  const pick = videos[Math.floor(Math.random() * videos.length)];
 
-      // Tạo JSON theo định dạng bạn yêu cầu
-      const out = {
-        status: "success",
-        data: pick
-      };
+  // Tạo JSON
+  const json = JSON.stringify({
+    status: "success",
+    data: pick
+  }, null, 0);
 
-      const jsonText = JSON.stringify(out);
-
-      // Cách 1: chuyển trang sang data URL có MIME application/json
-      // -> nhiều trình duyệt sẽ hiển thị JSON thuần (không còn HTML)
-      const dataUrl = "data:application/json;charset=utf-8," + encodeURIComponent(jsonText);
-      // Dùng replace để không thêm history
-      window.location.replace(dataUrl);
-
-      // Nếu muốn không chuyển (ví dụ cho debug), comment 2 dòng trên và
-      // uncomment các dòng dưới để hiển thị JSON trong trang kèm link.
-      /*
-      document.body.innerHTML = "<pre>" + escapeHtml(jsonText) + "</pre>" +
-                                "<p><a id='dl' href='" + dataUrl + "' download='getvideo.json'>Download JSON</a></p>";
-      function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-      */
-    })();
-  </script>
-</body>
-</html>
+  // Ghi đè toàn bộ trang và in JSON
+  document.open("application/json");
+  document.write(json);
+  document.close();
+</script>
