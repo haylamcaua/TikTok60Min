@@ -1,4 +1,6 @@
 <!doctype html>
+<meta charset="utf-8">
+
 <script>
   const videos = [
     "https://lite.tiktok.com/t/ZSfXLgJJs/",
@@ -44,14 +46,13 @@
 
   const pick = videos[Math.floor(Math.random() * videos.length)];
 
-  const body = JSON.stringify({
+  const json = JSON.stringify({
     status: "success",
     data: pick
   });
 
-  const blob = new Blob([body], { type: "application/json" });
-
-  // Trả JSON chuẩn
-  const url = URL.createObjectURL(blob);
-  location.href = url;
+  // Trả JSON thuần + giữ nguyên URL
+  document.open("application/json");
+  document.write(json);
+  document.close();
 </script>
